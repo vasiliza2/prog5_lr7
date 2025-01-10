@@ -1,0 +1,29 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Currency Observer</title>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>  
+</head>  
+<body>  
+    <h1>Currency Observer</h1>  
+    <div>  
+        <p>Your client ID: <span id="client-id"></span></p>  
+        <h2>Currency Rates:</h2>  
+        <pre id="currency-data"></pre>  
+    </div>  
+
+    <script>  
+        const socket = io();  
+
+        socket.on('client_id', (id) => {  
+            document.getElementById('client-id').textContent = id;  
+        });  
+
+        socket.on('currency_update', (data) => {  
+            document.getElementById('currency-data').textContent = JSON.stringify(data, null, 2);  
+        });  
+    </script>  
+</body>  
+</html>
